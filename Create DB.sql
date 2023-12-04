@@ -1,0 +1,113 @@
+CREATE TABLE "person"(
+    "id" SERIAL PRIMARY KEY,
+    "person_number" varchar(12) UNIQUE NOT NULL,
+    "first_name" varchar(100),
+    "last_name" varchar(100),
+    "street" varchar(100),
+    "zip" varchar(5),
+    "city" varchar(100),
+    "email" varchar(100),
+    "phone" varchar(100)
+);
+
+CREATE TABLE "price_scheme"(
+    "id" SERIAL PRIMARY KEY,
+    "lesson_type_price" int,
+    "skill_level_price" int,
+    "discount" int,
+    "description" varchar(1000)
+);
+
+CREATE TABLE "classroom"(
+    "id" SERIAL PRIMARY KEY,
+    "description" varchar(2000),
+    "zip" varchar(100),
+    "street" varchar(100),
+    "city" varchar(100)
+);
+
+CREATE TABLE "student"(
+    "id" SERIAL PRIMARY KEY,
+    "person_id" SERIAL REFERENCES "person" ON DELETE CASCADE,
+    "price_scheme_id" SERIAL REFERENCES "price_scheme",
+    "contact_email" varchar(100),
+    "contact_phone" varchar(100)
+);
+
+CREATE TABLE "student_sibling"(
+    "student_id" SERIAL REFERENCES "student" ON DELETE CASCADE,
+    "sibling_id" SERIAL REFERENCES "student" ON DELETE CASCADE,
+    PRIMARY KEY("student_id", "sibling_id")
+);
+
+CREATE TABLE "instructor"(
+    "id" SERIAL PRIMARY KEY,
+    "person_id" SERIAL REFERENCES "person" ON DELETE CASCADE,
+    "price_scheme_id" SERIAL REFERENCES "price_scheme",
+    "teach_ensembles" boolean
+);
+
+CREATE TABLE "instrument"(
+    "id" SERIAL PRIMARY KEY,
+    "brand" varchar(500),
+    "type" varchar(500)
+
+);
+
+CREATE TABLE "instrument_instructor"(
+    "instrument_id" SERIAL NOT NULL,
+    "instructor_id" SERIAL NOT NULL,
+    PRIMARY KEY("instrument_id","instructor_id")
+);
+
+CREATE TABLE "rented_instrument"(
+    "instrument_id" SERIAL REFERENCES "instrument",
+    "student_id" int REFERENCES "student",
+    "time_rented" timestamp,
+    "price" int,
+    "is_available" boolean,
+    PRIMARY KEY("instrument_id")
+);
+
+CREATE TYPE "type" AS ENUM ('Single lesson', 'Group lesson', 'Ensemble');
+CREATE TABLE "lesson"(
+    "id" SERIAL PRIMARY KEY,
+    "classroom_id" SERIAL REFERENCES "classroom",
+    "instructor_id" SERIAL REFERENCES "instructor",
+    "time" timestamp,
+    "lesson_type" type,
+    "skill_level" varchar(100)
+);
+
+CREATE TABLE "instrument_in_lesson"(
+    "instrument_id" SERIAL REFERENCES "instrument",
+    "lesson_id" SERIAL REFERENCES "lesson",
+    "is_available" boolean,
+    PRIMARY KEY("instrument_id")
+);
+
+CREATE TABLE "student_lesson"(
+    "student_id" SERIAL REFERENCES "student" ON DELETE CASCADE,
+    "lesson_id" SERIAL REFERENCES "lesson" ON DELETE CASCADE,
+    PRIMARY KEY ("student_id", "lesson_id")
+);
+
+CREATE TABLE "single_lesson"(
+    "lesson_id" SERIAL REFERENCES "lesson" ON DELETE CASCADE,
+    PRIMARY KEY ("lesson_id")
+);
+
+CREATE TABLE "group_lesson"(
+    "lesson_id" SERIAL REFERENCES "lesson" ON DELETE CASCADE,
+    "max_students" int NOT NULL,
+    "min_students" int,
+    PRIMARY KEY ("lesson_id")
+);
+
+CREATE TABLE "ensemble"(
+    "lesson_id" SERIAL REFERENCES "lesson" ON DELETE CASCADE,
+    "genre" varchar(100) NOT NULL,
+    "min_students" int NOT NULL,
+    "max_students" int NOT NULL,
+    PRIMARY KEY ("lesson_id")
+);
