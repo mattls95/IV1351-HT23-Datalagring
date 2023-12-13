@@ -149,12 +149,12 @@ insert into lesson(id,classroom_id,instructor_id,time,skill_level,lesson_type) v
 insert into lesson(id,classroom_id,instructor_id,time,skill_level,lesson_type) values(23,3,4,'2023/12/13 10:00:00','Beginner','Ensemble');
 
 
-insert into instrument(id,type,brand,price,is_available) values(1,'piano', 'G Brand',100,true);
+insert into instrument(id,type,brand,price,is_available) values(1,'Piano', 'G Brand',100,true);
 insert into instrument(id,type,brand,price,is_available) values(2,'Guitar', 'G Brand',200,true);
 insert into instrument(id,type,brand,price,is_available) values(3,'Flute', 'G Brand',300,true);
 insert into instrument(id,type,brand,price,is_available) values(4,'A instrument', 'G Brand',400,true);
 insert into instrument(id,type,brand,price,is_available) values(5,'Kvargiurt', 'D Brand',500,true);
-insert into instrument(id,type,brand,price,is_available) values(6,'piano', 'G Brand',100,true);
+insert into instrument(id,type,brand,price,is_available) values(6,'Piano', 'G Brand',100,true);
 insert into instrument(id,type,brand,price,is_available) values(7,'Guitar', 'G Brand',200,false);
 insert into instrument(id,type,brand,price,is_available) values(8,'Flute', 'G Brand',300,false);
 insert into instrument(id,type,brand,price,is_available) values(9,'A instrument', 'G Brand',400,false);
@@ -166,11 +166,19 @@ insert into instrument(id,type,brand,price,is_available) values(14,'D Instrument
 insert into instrument(id,type,brand,price,is_available) values(15,'E Instrument', 'H Brand',1000,false);
 insert into instrument(id,type,brand,price,is_available) values(16,'Kvargiurt', 'K Brand',2000,false);
 
-insert into rental(id,instrument_id,student_id,time_rented,time_terminated) values(1,6,14,'2023/02/24 08:00:00',NULL);
-insert into rental(id,instrument_id,student_id,time_rented,time_terminated) values(2,7,13,'2023/03/27 08:00:00',NULL);
-insert into rental(id,instrument_id,student_id,time_rented,time_terminated) values(3,8,12,'2023/03/27 08:00:00',NULL);
-insert into rental(id,instrument_id,student_id,time_rented,time_terminated) values(4,9,11,'2023/03/27 08:00:00',NULL);
-insert into rental(id,instrument_id,student_id,time_rented,time_terminated) values(5,10,10,'2023/03/27 08:00:00',NULL);
+insert into instrument(id,type,brand,price,is_available) values(17,'Piano', 'A Brand',2100,true);
+insert into instrument(id,type,brand,price,is_available) values(18,'Piano', 'B Brand',2200,true);
+insert into instrument(id,type,brand,price,is_available) values(19,'Guitar', 'C Brand',2300,true);
+insert into instrument(id,type,brand,price,is_available) values(20,'Guitar', 'D Brand',2400,true);
+insert into instrument(id,type,brand,price,is_available) values(21,'Flute', 'E Brand',2500,true);
+insert into instrument(id,type,brand,price,is_available) values(22,'Flute', 'A Brand',2600,true);
+insert into instrument(id,type,brand,price,is_available) values(23,'A instrument', 'B Brand',2700,true);
+insert into instrument(id,type,brand,price,is_available) values(24,'A instrument', 'C Brand',2800,true);
+insert into instrument(id,type,brand,price,is_available) values(25,'Kvargiurt', 'E Brand',2900,true);
+insert into instrument(id,type,brand,price,is_available) values(26,'Kvargiurt', 'D Brand',3000,true);
+insert into instrument(id,type,brand,price,is_available) values(27,'Kvargiurt', 'L Brand',5000,true);
+
+
 
 insert into instrument_in_lesson(instrument_id,lesson_id) values(11,1);
 insert into instrument_in_lesson(instrument_id,lesson_id) values(12,2);
@@ -293,4 +301,3 @@ insert into ensemble(lesson_id,genre,min_students,max_students) values(20,'Music
 insert into ensemble(lesson_id,genre,min_students,max_students) values(21,'Music B',5,7);
 insert into ensemble(lesson_id,genre,min_students,max_students) values(22,'Music A',5,7);
 insert into ensemble(lesson_id,genre,min_students,max_students) values(23,'Music B',5,7);
-
